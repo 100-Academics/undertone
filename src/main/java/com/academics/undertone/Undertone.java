@@ -1,6 +1,7 @@
 package com.academics.undertone;
 
 import com.academics.undertone.block.ModBlocks;
+import com.academics.undertone.item.ModCreativeModeTabs;
 import com.academics.undertone.item.ModItems;
 import org.slf4j.Logger;
 
@@ -56,8 +57,9 @@ public class Undertone {
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
 
-        ModItems.register(modEventBus);
-        ModBlocks.register(modEventBus);
+        ModCreativeModeTabs.register(modEventBus); // Register the deferred registers for our mod content. This will allow the game to recognize and load our items, blocks, creative mode tabs, etc etc.
+        ModItems.register(modEventBus); // see above
+        ModBlocks.register(modEventBus); // see above
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -66,7 +68,7 @@ public class Undertone {
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
-    private void commonSetup(FMLCommonSetupEvent event) {
+    private void commonSetup(FMLCommonSetupEvent event) { // ignore for now
 
     }
 
