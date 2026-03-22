@@ -1,5 +1,6 @@
 package com.academics.undertone;
 
+import com.academics.undertone.block.ModBlocks;
 import com.academics.undertone.item.ModItems;
 import org.slf4j.Logger;
 
@@ -56,6 +57,7 @@ public class Undertone {
         NeoForge.EVENT_BUS.register(this);
 
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -73,6 +75,10 @@ public class Undertone {
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS){
             event.accept(ModItems.ZINC_INGOT);
             event.accept(ModItems.RAW_ZINC);
+        }
+        if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS){
+            event.accept(ModBlocks.ZINC_ORE);
+            event.accept(ModBlocks.ZINC_BLOCK);
         }
     }
 
