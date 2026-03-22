@@ -23,6 +23,7 @@ public class ModCreativeModeTabs {
                             output.accept(ModItems.ZINC_INGOT);
                             output.accept(ModBlocks.ZINC_ORE);
                             output.accept(ModBlocks.ZINC_BLOCK);
+                            output.accept(ModItems.BLOCK_SWAPPER);
                         })
                         .build());
         public static void register(IEventBus bus) { // this is to allow the game to register our creative mode tab at the appropriate time during mod loading. This should always be called from the constructor of your main mod class, and the bus parameter should be the mod event bus passed into the constructor.

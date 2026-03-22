@@ -5,7 +5,7 @@ import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
+import com.academics.undertone.item.custom.BlockSwapperItem;
 
 // ** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ** \\
 // ** READ ME ** \\
@@ -39,6 +39,9 @@ public class ModItems {
     public static final DeferredItem<Item> RAW_ZINC = ITEMS.register("raw_zinc", // same as above
             () -> new Item(new Item.Properties()));
 
+    public static final DeferredItem<Item> BLOCK_SWAPPER = ITEMS.register("block_swapper",
+            () -> new BlockSwapperItem(new Item.Properties().durability(64).stacksTo(1)));
+                  // ** ^^^^ when registering a complex item, make sure to call the class instead of Item.
     public static void register(IEventBus bus) { // this is to allow the game to register our items at the appropriate time during mod loading. This should always be called from the constructor of your main mod class, and the bus parameter should be the mod event bus passed into the constructor.
         ITEMS.register(bus);                     // you call this in the Undertone file.
     }
