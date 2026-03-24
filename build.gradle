@@ -169,6 +169,30 @@ dependencies {
 
 }
 
+// Keep dev run quests in sync with the tracked repository config.
+def ftbQuestsSourceDir = layout.projectDirectory.dir("config/ftbquests/quests")
+def ftbQuestsRunConfigDir = layout.projectDirectory.dir("run/config/ftbquests/quests")
+
+def syncFtbQuestsToRunConfig = tasks.register("syncFtbQuestsToRunConfig", Sync) {
+    group = "mod development"
+    description = "Copies FTB Quests data from config/ to run/config/ for local runs."
+
+    from(ftbQuestsSourceDir)
+    into(ftbQuestsRunConfigDir)
+
+    inputs.dir(ftbQuestsSourceDir)
+    outputs.dir(ftbQuestsRunConfigDir)
+    onlyIf { ftbQuestsSourceDir.asFile.exists() }
+}
+
+tasks.matching { it.name in ["runClient", "runServer", "runData", "runGameTestServer"] }.configureEach {
+    dependsOn(syncFtbQuestsToRunConfig)
+}
+
+tasks.named("processResources").configure {
+    dependsOn(syncFtbQuestsToRunConfig)
+}
+//THIS IS WHERE IT STOPPED IN CASE I NEED TO DELETE
 // This block of code expands all declared replace properties in the specified resource targets.
 // A missing property will result in an error. Properties are expanded using ${} Groovy notation.
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
@@ -193,6 +217,7 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
 sourceSets.main.resources.srcDir generateModMetadata
 // To avoid having to run "generateModMetadata" manually, make it run on every project reload
 neoForge.ideSyncTask generateModMetadata
+neoForge.ideSyncTask syncFtbQuestsToRunConfig
 
 // Example configuration to allow publishing using the maven-publish plugin
 publishing {
