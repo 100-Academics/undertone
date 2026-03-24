@@ -27,7 +27,12 @@ sourceSets.main.resources {
 }
 
 repositories {
-    // Add here additional repositories if required by some of the dependencies below.
+    maven {//needed for every mod i imported
+        url = uri("https://cursemaven.com")
+        content {
+            includeGroup "curse.maven"
+        }
+    }
 }
 
 base {
@@ -139,7 +144,27 @@ dependencies {
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-    implementation 'com.example:examplemod:1.0'
+
+
+    //in JJ terms, this is how you do the thing
+    //go to curseforge downlaod apge
+    //when you go to files, thetres a curse Maven snippet
+    //copy and paste that in here
+    ///i already did the other stuff dw about it.
+
+    //FTB quests dependancies n stuff
+    implementation "curse.maven:architectury-api-419699:5786327"
+    implementation "curse.maven:ftb-xmod-compat-889915:5494734"
+    implementation "curse.maven:ftb-teams-forge-404468:5448371"
+    implementation "curse.maven:ftb-quests-forge-289412:5543248"
+    implementation "curse.maven:ftb-library-forge-404465:5583834"
+
+    //JEI
+    implementation "curse.maven:jei-238222:5609864"
+
+    //Lootr chests
+    implementation "curse.maven:lootr-361276:7293581"
+
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
