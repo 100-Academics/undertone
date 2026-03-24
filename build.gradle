@@ -33,6 +33,10 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+    // JEI publishes its dev artifacts here.
+    maven {
+        url = uri("https://maven.blamejared.com")
+    }
 }
 
 base {
@@ -125,10 +129,10 @@ configurations {
 dependencies {
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
-    // compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
-    // compileOnly "mezz.jei:jei-${mc_version}-neoforge-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
     // We add the full version to localRuntime, not runtimeOnly, so that we do not publish a dependency on it
-    // localRuntime "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
+    localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
 
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
@@ -159,8 +163,6 @@ dependencies {
     implementation "curse.maven:ftb-quests-forge-289412:5543248"
     implementation "curse.maven:ftb-library-forge-404465:5583834"
 
-    //JEI
-    implementation "curse.maven:jei-238222:5609864"
 
     //Lootr chests
     implementation "curse.maven:lootr-361276:7293581"
@@ -175,6 +177,7 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             minecraft_version_range: minecraft_version_range,
             neo_version            : neo_version,
             loader_version_range   : loader_version_range,
+            jei_version            : jei_version,
             mod_id                 : mod_id,
             mod_name               : mod_name,
             mod_license            : mod_license,
