@@ -1,0 +1,26 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "in_the_beginning"
+	group: ""
+	id: "3E47D626E6BA5A8E"
+	order_index: 0
+	quest_links: [ ]
+	quests: [{
+		id: "76636436FA92D8EB"
+		rewards: [{
+			id: "02625B27C311EC1A"
+			item: {
+				count: 1
+				id: "minecraft:oak_trapdoor"
+			}
+			type: "item"
+		}]
+		tasks: [{
+			id: "7892DAA81AEE22B8"
+			type: "checkmark"
+		}]
+		x: 0.0d
+		y: -1.0d
+	}]
+}
