@@ -192,7 +192,7 @@ tasks.matching { it.name in ["runClient", "runServer", "runData", "runGameTestSe
 tasks.named("processResources").configure {
     dependsOn(syncFtbQuestsToRunConfig)
 }
-//THIS IS WHERE IT STOPPED IN CASE I NEED TO DELETE
+
 // This block of code expands all declared replace properties in the specified resource targets.
 // A missing property will result in an error. Properties are expanded using ${} Groovy notation.
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
