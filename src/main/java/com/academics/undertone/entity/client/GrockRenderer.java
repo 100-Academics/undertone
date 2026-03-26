@@ -16,7 +16,7 @@ public class GrockRenderer extends MobRenderer<GrockEntity, GrockModel<GrockEnti
 
     @Override
     public ResourceLocation getTextureLocation(GrockEntity entity) {
-        return ResourceLocation.fromNamespaceAndPath(Undertone.MODID, "textures/entity/grock/gRockTexture.png");
+        return ResourceLocation.fromNamespaceAndPath(Undertone.MODID, "textures/entity/grock/grock.png");
     }
 
     @Override

@@ -57,8 +57,6 @@ public class Undertone {
     public static final String MODID = "undertone";
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger(); // ** if you want to use the logger, import Undertone.LOGGER and then call Undertone.LOGGER.info("XYZ")
-    public static ModEntities ModEntities;
-
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public Undertone(IEventBus modEventBus, ModContainer modContainer) {
@@ -74,6 +72,7 @@ public class Undertone {
         ModCreativeModeTabs.register(modEventBus); // Register the deferred registers for our mod content. This will allow the game to recognize and load our items, blocks, creative mode tabs, etc etc.
         ModItems.register(modEventBus); // see above
         ModBlocks.register(modEventBus); // see above
+        ModEntities.register(modEventBus); // register custom entity types before attribute creation event fires
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);

@@ -13,12 +13,15 @@ import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 public class ModEventBusEvents {
 
     @SubscribeEvent
-    public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(GrockModel.LAYER_LOCATION, GrockModel::createBodyLayer);
-    }
-
-    @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event){
         event.put(ModEntities.GROCK.get(), GrockEntity.createAttributes().build());
+    }
+
+    @EventBusSubscriber(modid = Undertone.MODID, bus = EventBusSubscriber.Bus.MOD, value = net.neoforged.api.distmarker.Dist.CLIENT)
+    public static class ClientModEvents {
+        @SubscribeEvent
+        public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+            event.registerLayerDefinition(GrockModel.LAYER_LOCATION, GrockModel::createBodyLayer);
+        }
     }
 }

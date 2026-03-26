@@ -45,6 +45,7 @@ public class GrockEntity extends Monster {
 
     @Override
     public void tick() {
+        super.tick();
         if(this.level().isClientSide){
             this.setupAnimationStates();
         }

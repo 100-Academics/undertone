@@ -12,7 +12,9 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 
-public class GrockModel<T extends GrockEntity> extends HierarchicalModel<T> {
+public class
+
+GrockModel<T extends GrockEntity> extends HierarchicalModel<T> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Undertone.MODID, "grock"), "main");
     private final ModelPart body;
     private final ModelPart legs;
