@@ -53,7 +53,7 @@ public class Undertone {
     // Define mod id in a common place for everything to reference
     public static final String MODID = "undertone";
     // Directly reference a slf4j logger
-    public static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger(); // ** if you want to use the logger, import Undertone.LOGGER and then call Undertone.LOGGER.info("XYZ")
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
