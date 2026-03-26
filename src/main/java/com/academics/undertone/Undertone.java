@@ -1,8 +1,11 @@
 package com.academics.undertone;
 
 import com.academics.undertone.block.ModBlocks;
+import com.academics.undertone.entity.ModEntities;
+import com.academics.undertone.entity.client.GrockRenderer;
 import com.academics.undertone.item.ModCreativeModeTabs;
 import com.academics.undertone.item.ModItems;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -54,6 +57,7 @@ public class Undertone {
     public static final String MODID = "undertone";
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger(); // ** if you want to use the logger, import Undertone.LOGGER and then call Undertone.LOGGER.info("XYZ")
+    public static ModEntities ModEntities;
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
@@ -105,7 +109,7 @@ public class Undertone {
     static class ClientModEvents {
         @SubscribeEvent
         static void onClientSetup(FMLClientSetupEvent event) {
-
+            EntityRenderers.register(ModEntities.GROCK.get(), GrockRenderer::new);
         }
     }
 }

@@ -7,5 +7,7 @@
   "block.undertone.zinc_ore": "Zinc Ore",
   "block.undertone.zinc_block": "Block of Zinc",
 
-  "creativetab.undertone.undertone": "Undertone"
+  "creativetab.undertone.undertone": "Undertone",
+
+  "entity.undertone.grock" : "Grock"
 }
