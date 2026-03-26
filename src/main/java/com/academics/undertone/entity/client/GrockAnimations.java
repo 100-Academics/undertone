@@ -10,7 +10,7 @@ import net.minecraft.client.animation.KeyframeAnimations;
 /**
  * Made with Blockbench 5.1.1
  * Exported for Minecraft version 1.19 or later with Mojang mappings
- * @author Author
+ * @author Ghost_Of_Gravity
  */
 public class GrockAnimations {
 

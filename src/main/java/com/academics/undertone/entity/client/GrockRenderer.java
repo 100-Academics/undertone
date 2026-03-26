@@ -10,6 +10,10 @@ import net.minecraft.resources.ResourceLocation;
 
 public class GrockRenderer extends MobRenderer<GrockEntity, GrockModel<GrockEntity>> {
 
+    private int xScale = 1;
+    private int yScale = 1;
+    private int zScale = 1;
+
     public GrockRenderer(EntityRendererProvider.Context context) {
         super(context, new GrockModel<>(context.bakeLayer(GrockModel.LAYER_LOCATION)), 0.5f);
     }
@@ -22,9 +26,9 @@ public class GrockRenderer extends MobRenderer<GrockEntity, GrockModel<GrockEnti
     @Override
     public void render(GrockEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         if(entity.isBaby()){
-            poseStack.scale(0.5f, 0.5f, 0.5f); // Scale down the model for baby entities
+            poseStack.scale(xScale * 0.5f, yScale * 1.0f, zScale * (0.5f)); // Scale down the model for baby entities
         } else {
-            poseStack.scale(1.0f, 1.0f, 1.0f); // Normal scale for adult entities
+            poseStack.scale(xScale * 1.2f, yScale * 1.2f, zScale * 1.2f); // Normal scale for adult entities
         }
 
         super.render(entity, entityYaw, partialTicks, poseStack, bufferSource, packedLight);

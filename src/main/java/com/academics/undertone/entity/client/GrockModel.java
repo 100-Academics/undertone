@@ -16,12 +16,14 @@ public class
 
 GrockModel<T extends GrockEntity> extends HierarchicalModel<T> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Undertone.MODID, "grock"), "main");
+    private final ModelPart root;
     private final ModelPart body;
     private final ModelPart legs;
     private final ModelPart frontLegs;
     private final ModelPart backLegs;
 
     public GrockModel(ModelPart root) {
+        this.root = root;
         this.body = root.getChild("body");
         this.legs = root.getChild("legs");
         this.frontLegs = this.legs.getChild("frontLegs");
@@ -124,6 +126,7 @@ GrockModel<T extends GrockEntity> extends HierarchicalModel<T> {
         this.root().getAllParts().forEach(ModelPart::resetPose);
 
         this.animateWalk(GrockAnimations.walk, limbSwing, limbSwingAmount, 2f, 2.5f);
+        this.animate(entity.attackAnimationState, GrockAnimations.attack, ageInTicks, 1.0f);
     }
 
     @Override
@@ -134,6 +137,6 @@ GrockModel<T extends GrockEntity> extends HierarchicalModel<T> {
 
     @Override
     public ModelPart root() {
-        return this.body;
+        return this.root;
     }
 }

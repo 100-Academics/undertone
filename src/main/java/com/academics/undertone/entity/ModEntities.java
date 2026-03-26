@@ -16,10 +16,12 @@ public class ModEntities {
 
     public static final Supplier<EntityType<GrockEntity>> GROCK = ENTITY_TYPES.register("grock",
             () -> EntityType.Builder.of(GrockEntity::new, MobCategory.MONSTER)
-                    .sized(1f, 1.2f) // Size of the entity (width, height)
+                    .sized(1.2f, 1.2f) // hitbox size of the entity (width, height)
+                    .fireImmune()
                     .build("grock"));
 
     public static void register(IEventBus bus) {
         ENTITY_TYPES.register(bus);
     }
+
 }
