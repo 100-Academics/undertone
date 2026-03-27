@@ -47,6 +47,7 @@ public class GrockEntity extends Monster {
                 .add(Attributes.FOLLOW_RANGE, 16.0D);
     }
 
+
     private void setupAnimationStates(){
         if(this.idleAnimationTimeout <= 0){
             this.idleAnimationTimeout = 80; // TODO
@@ -61,7 +62,6 @@ public class GrockEntity extends Monster {
             this.attackAnimationState.stop();
         }
     }
-
     public void triggerAttackAnimation() {
         if (this.level().isClientSide) {
             return;

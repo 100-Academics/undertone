@@ -1,7 +1,9 @@
 package com.academics.undertone;
 
 import com.academics.undertone.block.ModBlocks;
+import com.academics.undertone.command.ModCommands;
 import com.academics.undertone.entity.ModEntities;
+import com.academics.undertone.entity.attachments.ModAttachments;
 import com.academics.undertone.entity.client.GrockRenderer;
 import com.academics.undertone.item.ModCreativeModeTabs;
 import com.academics.undertone.item.ModItems;
@@ -68,12 +70,15 @@ public class Undertone {
         // Note that this is necessary if and only if we want *this* class (Undertone) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.register(ModCommands.class);
 
         ModCreativeModeTabs.register(modEventBus); // Register the deferred registers for our mod content. This will allow the game to recognize and load our items, blocks, creative mode tabs, etc etc.
         ModItems.register(modEventBus); // see above
         ModBlocks.register(modEventBus); // see above
-        ModEntities.register(modEventBus); // register custom entity types before attribute creation event fires
+        ModEntities.register(modEventBus); // see above
 
+        ModAttachments.register(modEventBus); // see above
+        
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
