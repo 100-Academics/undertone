@@ -46,7 +46,7 @@ public class ModCommands {
         );
     }
 
-    private static int addorbs(CommandSourceStack source, ServerPlayer player, int amount) {
+    public static int addorbs(CommandSourceStack source, ServerPlayer player, int amount) {
 
         player.setData(ModAttachments.ORBS.get(), (player.getData(ModAttachments.ORBS.get()) + amount));
         source.sendSuccess(() -> Component.literal("Successfully added " + amount + " orbs to " + player.getScoreboardName()), true);
@@ -54,7 +54,7 @@ public class ModCommands {
         return 1; // 1 = Success in Brigadier
     }
 
-    private static int printorbs(CommandSourceStack source, ServerPlayer player) {
+    public static int printorbs(CommandSourceStack source, ServerPlayer player) {
         int orbs = player.getData(ModAttachments.ORBS.get());
         source.sendSuccess(() -> Component.literal(player.getScoreboardName() + " has " + orbs + " orbs."), true);
         return 1; // 1 = Success in Brigadier
