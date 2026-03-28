@@ -9,12 +9,9 @@
 	quests: [{
 		id: "76636436FA92D8EB"
 		rewards: [{
-			id: "02625B27C311EC1A"
-			item: {
-				count: 1
-				id: "minecraft:oak_trapdoor"
-			}
-			type: "item"
+			command: "/addorbs @p 1"
+			id: "4BDB2AC1D50A1701"
+			type: "command"
 		}]
 		tasks: [{
 			id: "7892DAA81AEE22B8"

@@ -12,18 +12,22 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 
 public class ModCommands {
+    // Keep Brigadier argument keys in one place to avoid mismatched string literals.
+    private static final String ARG_TARGET = "target";
+    private static final String ARG_AMOUNT = "amount";
+
     @SubscribeEvent
     public static void register(RegisterCommandsEvent event) {
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
         dispatcher.register(
                 Commands.literal("addorbs")
                         .requires(source -> source.hasPermission(2)) // Permission level 2 (OP)
-                        .then(Commands.argument("target", EntityArgument.player())
-                                .then(Commands.argument("amount", IntegerArgumentType.integer(1))
+                        .then(Commands.argument(ARG_TARGET, EntityArgument.player())
+                                .then(Commands.argument(ARG_AMOUNT, IntegerArgumentType.integer(1))
                                         .executes(context -> {
                                             // Extract arguments
-                                            ServerPlayer targetPlayer = EntityArgument.getPlayer(context, "target");
-                                            int amount = IntegerArgumentType.getInteger(context, "amount");
+                                            ServerPlayer targetPlayer = EntityArgument.getPlayer(context, ARG_TARGET);
+                                            int amount = IntegerArgumentType.getInteger(context, ARG_AMOUNT);
 
                                             // Pass to your private method
                                             return addorbs(context.getSource(), targetPlayer, amount);
@@ -34,10 +38,10 @@ public class ModCommands {
 
         dispatcher.register(
                 Commands.literal("printorbs")
-                        .then(Commands.argument("target", EntityArgument.player())
+                        .then(Commands.argument(ARG_TARGET, EntityArgument.player())
                                 .executes(context -> {
                                     // Extract arguments
-                                    ServerPlayer targetPlayer = EntityArgument.getPlayer(context, "target");
+                                    ServerPlayer targetPlayer = EntityArgument.getPlayer(context, ARG_TARGET);
 
                                     // Pass to your private method
                                     return printorbs(context.getSource(), targetPlayer);
