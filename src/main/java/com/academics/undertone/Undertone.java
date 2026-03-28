@@ -24,6 +24,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.storage.LevelResource;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -34,13 +35,23 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraft.client.Minecraft;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.loading.FMLPaths;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.StandardOpenOption;
+import java.nio.file.attribute.BasicFileAttributes;
 
 // ** README ** \\
 // ** IT IS VERY IMPORTANT THAT AFTER YOUR BUILD YOU CLICK ON THE LITTLE ELEPHANT ON THE RIGHT SIDE OF YOUR SCREEN (SHOULD SAY "GRADLE" WHEN YOU HOVER OVER IT)
@@ -106,6 +117,61 @@ public class Undertone {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
 
+    }
+
+    @SubscribeEvent
+    public void onServerAboutToStart(ServerAboutToStartEvent event) {
+        syncFtbQuestsForNewWorld(event.getServer().getWorldPath(LevelResource.ROOT));
+    }
+
+    private void syncFtbQuestsForNewWorld(Path worldRoot) {
+        Path syncMarker = worldRoot.resolve(".undertone_ftbquests_synced");
+
+        if (Files.exists(syncMarker)) {
+            return;
+        }
+
+        Path gameDir = FMLPaths.GAMEDIR.get().toAbsolutePath().normalize();
+        Path projectConfigDir = gameDir.getParent() != null
+                ? gameDir.getParent().resolve("config")
+                : gameDir.resolve("config");
+
+        Path sourceDir = projectConfigDir.resolve("ftbquests");
+        Path targetDir = FMLPaths.CONFIGDIR.get().toAbsolutePath().normalize().resolve("ftbquests");
+
+        if (!Files.isDirectory(sourceDir)) {
+            LOGGER.warn("Skipping FTB Quests sync: source folder not found at {}", sourceDir);
+            return;
+        }
+
+        try {
+            copyDirectory(sourceDir, targetDir);
+            Files.createDirectories(worldRoot);
+            Files.writeString(syncMarker, "synced", StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+            LOGGER.info("Synced FTB Quests config for world {} from {} to {}", worldRoot.getFileName(), sourceDir, targetDir);
+        } catch (IOException exception) {
+            LOGGER.error("Failed to sync FTB Quests config for world {}", worldRoot.getFileName(), exception);
+        }
+    }
+
+    private void copyDirectory(Path sourceDir, Path targetDir) throws IOException {
+        Files.walkFileTree(sourceDir, new SimpleFileVisitor<>() {
+            @Override
+            public java.nio.file.FileVisitResult preVisitDirectory(Path directory, BasicFileAttributes attributes) throws IOException {
+                Path relativePath = sourceDir.relativize(directory);
+                Path destination = targetDir.resolve(relativePath);
+                Files.createDirectories(destination);
+                return java.nio.file.FileVisitResult.CONTINUE;
+            }
+
+            @Override
+            public java.nio.file.FileVisitResult visitFile(Path file, BasicFileAttributes attributes) throws IOException {
+                Path relativePath = sourceDir.relativize(file);
+                Path destination = targetDir.resolve(relativePath);
+                Files.copy(file, destination, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);
+                return java.nio.file.FileVisitResult.CONTINUE;
+            }
+        });
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
