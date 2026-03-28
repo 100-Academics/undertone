@@ -9,5 +9,15 @@
 
   "creativetab.undertone.undertone": "Undertone",
 
-  "entity.undertone.grock" : "Grock"
+  "entity.undertone.grock" : "Grock",
+
+  "attribute.name.undertone.fire_resistance": "Fire Resistance",
+  "attribute.name.undertone.resistance": "Resistance",
+  "attribute.name.undertone.strength": "Strength",
+  "attribute.name.undertone.water_breathing": "Water Breathing",
+  "attribute.name.undertone.haste": "Haste",
+  "attribute.name.undertone.health": "Health",
+  "attribute.name.undertone.saturation": "Saturation",
+  "attribute.name.undertone.regeneration": "Regeneration",
+  "attribute.name.undertone.absorption": "Absorption"
 }

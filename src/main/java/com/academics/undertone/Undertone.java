@@ -7,6 +7,7 @@ import com.academics.undertone.entity.attachments.ModAttachments;
 import com.academics.undertone.entity.client.GrockRenderer;
 import com.academics.undertone.item.ModCreativeModeTabs;
 import com.academics.undertone.item.ModItems;
+import com.academics.undertone.player.ModChangeAttributes;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import org.slf4j.Logger;
 
@@ -89,6 +90,7 @@ public class Undertone {
         ModEntities.register(modEventBus); // see above
 
         ModAttachments.register(modEventBus); // see above
+        ModChangeAttributes.register(modEventBus); // register custom player attributes
         
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
