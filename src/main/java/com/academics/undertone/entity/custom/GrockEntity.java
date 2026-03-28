@@ -60,17 +60,20 @@ public class GrockEntity extends Monster {
     private void setupAnimationStates(){
         if(this.idleAnimationTimeout <= 0){
 
-            int r = this.nextWorldRandomInt(2);
+            int r = this.nextWorldRandomInt(5);
 
-            if(r == 0){
+            if(r == 1){
                 this.idleAnimationState2.stop();
                 this.idleAnimationTimeout = 60 + this.nextWorldRandomInt(40);
-
                 this.idleAnimationState.start(this.tickCount);
-            } else {
+            } if (r == 2) {
                 this.idleAnimationState.stop();
                 this.idleAnimationTimeout = 10;
                 this.idleAnimationState2.start(this.tickCount);
+            } else {
+                this.idleAnimationState.stop();
+                this.idleAnimationState2.stop();
+                idleAnimationTimeout = 200;
             }
 
         } else{
@@ -88,14 +91,14 @@ public class GrockEntity extends Monster {
             return;
         }
 
-        this.attackAnimationTimeout = 12;
+        this.attackAnimationTimeout = 24;
         this.level().broadcastEntityEvent(this, ATTACK_ANIMATION_EVENT);
     }
 
     @Override
     public void handleEntityEvent(byte id) {
         if (id == ATTACK_ANIMATION_EVENT) {
-            this.attackAnimationTimeout = 12;
+            this.attackAnimationTimeout = 24;
             this.attackAnimationState.start(this.tickCount);
             return;
         }
