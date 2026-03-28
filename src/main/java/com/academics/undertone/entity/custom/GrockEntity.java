@@ -14,17 +14,26 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.pathfinder.PathType;
 
 public class GrockEntity extends Monster {
+
     private static final byte ATTACK_ANIMATION_EVENT = 60;
 
     public final AnimationState idleAnimationState = new AnimationState();
+    public final AnimationState idleAnimationState2 = new AnimationState();
     public final AnimationState attackAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
     private int attackAnimationTimeout = 0;
 
+    // Use world-level RNG for deterministic world-tied randomness.
+    private int nextWorldRandomInt(int bound) {
+        return this.level().getRandom().nextInt(bound);
+    }
+
     public GrockEntity(EntityType<? extends Monster> type, Level level) {
         super(type, level);
+        this.setPathfindingMalus(PathType.WATER, -1.0F);
     }
 
     @Override
@@ -50,8 +59,20 @@ public class GrockEntity extends Monster {
 
     private void setupAnimationStates(){
         if(this.idleAnimationTimeout <= 0){
-            this.idleAnimationTimeout = 80; // TODO
-            this.idleAnimationState.start(this.tickCount);
+
+            int r = this.nextWorldRandomInt(2);
+
+            if(r == 0){
+                this.idleAnimationState2.stop();
+                this.idleAnimationTimeout = 60 + this.nextWorldRandomInt(40);
+
+                this.idleAnimationState.start(this.tickCount);
+            } else {
+                this.idleAnimationState.stop();
+                this.idleAnimationTimeout = 10;
+                this.idleAnimationState2.start(this.tickCount);
+            }
+
         } else{
             this.idleAnimationTimeout--;
         }
