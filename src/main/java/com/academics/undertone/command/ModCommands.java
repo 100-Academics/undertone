@@ -172,7 +172,7 @@ public class ModCommands {
         source.sendSuccess(() -> Component.literal(player.getScoreboardName() + " has " + orbs + " orbs."), true);
         return 1; // 1 = Success in Brigadier
     }
-
+ 
     public static int setAttributeLevel(CommandSourceStack source, ServerPlayer player, String attributeId, int level) throws CommandSyntaxException {
         PlayerAttributeLevels.Entry entry = resolveEntry(attributeId);
         int applied = PlayerAttributeLevels.setLevel(player, entry, level);
