@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.server.level.ServerPlayer;
 import org.jetbrains.annotations.Nullable;
 
 
@@ -51,9 +52,14 @@ public class LevelingAltar extends BaseEntityBlock {
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (level.getBlockEntity(pos) instanceof LevelingAltarEntity altarEntity) {
             Undertone.LOGGER.info("Interacted with Leveling Altar at {}", pos);
-            level.playSound(player, pos, SoundEvents.PLAYER_LEVELUP, SoundSource.BLOCKS, 1.0f, 1.0f);
+
+            if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
+                serverPlayer.openMenu(altarEntity, buffer -> buffer.writeBlockPos(pos));
+                level.playSound(null, pos, SoundEvents.SHULKER_OPEN, SoundSource.BLOCKS, 1.0f, 1.0f);
+            }
+
             return ItemInteractionResult.SUCCESS;
         }
-        return ItemInteractionResult.SUCCESS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 }

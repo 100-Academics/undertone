@@ -26,6 +26,11 @@ public class GrockEntity extends Monster {
     private int idleAnimationTimeout = 0;
     private int attackAnimationTimeout = 0;
 
+    private float yaw;
+    private float pitch;
+
+    private static final int ATTACK_LOCK_TICKS = 24;
+
     // Use world-level RNG for deterministic world-tied randomness.
     private int nextWorldRandomInt(int bound) {
         return this.level().getRandom().nextInt(bound);
@@ -79,27 +84,46 @@ public class GrockEntity extends Monster {
         } else{
             this.idleAnimationTimeout--;
         }
+    }
 
-        if (this.attackAnimationTimeout > 0) {
-            this.attackAnimationTimeout--;
-        } else {
+    private void tickAttackLock() {
+        if (this.attackAnimationTimeout <= 0) {
+            return;
+        }
+
+        this.attackAnimationTimeout--;
+
+        // Freeze facing while the attack animation is active.
+        this.setYRot(this.yaw);
+        this.setXRot(this.pitch);
+        this.yHeadRot = this.yaw;
+        this.yHeadRotO = this.yaw;
+        this.yBodyRot = this.yaw;
+        this.yBodyRotO = this.yaw;
+
+        if (this.attackAnimationTimeout == 0 && this.level().isClientSide) {
             this.attackAnimationState.stop();
         }
     }
+
     public void triggerAttackAnimation() {
         if (this.level().isClientSide) {
             return;
         }
 
-        this.attackAnimationTimeout = 24;
+        this.yaw = this.getYRot();
+        this.pitch = this.getXRot();
+        this.attackAnimationTimeout = ATTACK_LOCK_TICKS;
         this.level().broadcastEntityEvent(this, ATTACK_ANIMATION_EVENT);
     }
 
     @Override
     public void handleEntityEvent(byte id) {
         if (id == ATTACK_ANIMATION_EVENT) {
-            this.attackAnimationTimeout = 24;
+            this.attackAnimationTimeout = ATTACK_LOCK_TICKS;
             this.attackAnimationState.start(this.tickCount);
+            yaw = this.getYRot();
+            pitch = this.getXRot();
             return;
         }
 
@@ -109,6 +133,7 @@ public class GrockEntity extends Monster {
     @Override
     public void tick() {
         super.tick();
+        this.tickAttackLock();
         if(this.level().isClientSide){
             this.setupAnimationStates();
         }

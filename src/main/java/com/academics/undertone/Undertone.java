@@ -9,6 +9,7 @@ import com.academics.undertone.entity.client.GrockRenderer;
 import com.academics.undertone.item.ModCreativeModeTabs;
 import com.academics.undertone.item.ModItems;
 import com.academics.undertone.player.ModChangeAttributes;
+import com.academics.undertone.screen.ModMenuTypes;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import org.slf4j.Logger;
 
@@ -88,12 +89,14 @@ public class Undertone {
         ModCreativeModeTabs.register(modEventBus); // Register the deferred registers for our mod content. This will allow the game to recognize and load our items, blocks, creative mode tabs, etc etc.
         ModItems.register(modEventBus); // see above
         ModBlocks.register(modEventBus); // see above
+
         ModBlockEntities.register(modEventBus); // register block entities before they are instantiated in-world
         ModEntities.register(modEventBus); // see above
 
         ModAttachments.register(modEventBus); // see above
         ModChangeAttributes.register(modEventBus); // register custom player attributes
-        
+
+        ModMenuTypes.register(modEventBus);
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
