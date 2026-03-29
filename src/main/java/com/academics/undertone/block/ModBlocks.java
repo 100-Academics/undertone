@@ -1,6 +1,7 @@
 package com.academics.undertone.block;
 
 import com.academics.undertone.Undertone;
+import com.academics.undertone.block.custom.LevelingAltar;
 import com.academics.undertone.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -30,10 +31,13 @@ public class ModBlocks {
     public static final DeferredBlock<Block> ZINC_BLOCK = registerBlock("zinc_block", // same as above
             () -> new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F, 6.0F).sound(SoundType.METAL)));
 
+    public static final DeferredBlock<LevelingAltar> LEVELING_ALTAR = registerBlock("leveling_altar",
+            () -> new LevelingAltar(BlockBehaviour.Properties.of().noOcclusion()));
+
+
     private static <T extends Block> void registerBlock(String name, DeferredBlock<T> block) { // Helper method to register a BlockItem for a block. This is called from the other registerBlock method, which ensures that every block registered with that method will have a corresponding item.
         ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties())); // See line 21.
     }
-
 
     public static void register(IEventBus bus) { // this is to allow the game to register our blocks at the appropriate time during mod loading.
         BLOCKS.register(bus);

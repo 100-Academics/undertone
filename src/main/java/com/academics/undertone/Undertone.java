@@ -1,6 +1,7 @@
 package com.academics.undertone;
 
 import com.academics.undertone.block.ModBlocks;
+import com.academics.undertone.block.entity.ModBlockEntities;
 import com.academics.undertone.command.ModCommands;
 import com.academics.undertone.entity.ModEntities;
 import com.academics.undertone.entity.attachments.ModAttachments;
@@ -87,6 +88,7 @@ public class Undertone {
         ModCreativeModeTabs.register(modEventBus); // Register the deferred registers for our mod content. This will allow the game to recognize and load our items, blocks, creative mode tabs, etc etc.
         ModItems.register(modEventBus); // see above
         ModBlocks.register(modEventBus); // see above
+        ModBlockEntities.register(modEventBus); // register block entities before they are instantiated in-world
         ModEntities.register(modEventBus); // see above
 
         ModAttachments.register(modEventBus); // see above
