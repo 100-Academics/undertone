@@ -2,8 +2,10 @@ package com.academics.undertone.events;
 
 import com.academics.undertone.Undertone;
 import com.academics.undertone.entity.ModEntities;
-import com.academics.undertone.entity.client.GrockModel;
+import com.academics.undertone.entity.client.Grock.GrockModel;
+import com.academics.undertone.entity.client.Rudahh.RudahhModel;
 import com.academics.undertone.entity.custom.GrockEntity;
+import com.academics.undertone.entity.custom.RudahhEntity;
 import com.academics.undertone.screen.ModMenuTypes;
 import com.academics.undertone.screen.custom.LevelingAltarScreen;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -18,6 +20,7 @@ public class ModEventBusEvents {
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event){
         event.put(ModEntities.GROCK.get(), GrockEntity.createAttributes().build());
+        event.put(ModEntities.RUDAHH.get(), RudahhEntity.createAttributes().build());
     }
 
     @EventBusSubscriber(modid = Undertone.MODID, bus = EventBusSubscriber.Bus.MOD, value = net.neoforged.api.distmarker.Dist.CLIENT)
@@ -25,6 +28,7 @@ public class ModEventBusEvents {
         @SubscribeEvent
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
             event.registerLayerDefinition(GrockModel.LAYER_LOCATION, GrockModel::createBodyLayer);
+            event.registerLayerDefinition(RudahhModel.LAYER_LOCATION, RudahhModel::createBodyLayer);
         }
 
         @SubscribeEvent

@@ -1,4 +1,4 @@
-package com.academics.undertone.entity.client;
+package com.academics.undertone.entity.client.Grock;
 
 // Save this class in your mod and generate all required imports
 

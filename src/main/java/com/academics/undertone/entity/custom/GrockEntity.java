@@ -25,6 +25,7 @@ public class GrockEntity extends Monster {
     public final AnimationState attackAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
     private int attackAnimationTimeout = 0;
+    private int r = 0;
 
     private float yaw;
     private float pitch;
@@ -65,7 +66,7 @@ public class GrockEntity extends Monster {
     private void setupAnimationStates(){
         if(this.idleAnimationTimeout <= 0){
 
-            int r = this.nextWorldRandomInt(5);
+            r = this.nextWorldRandomInt(5);
 
             if(r == 1){
                 this.idleAnimationState2.stop();

@@ -1,4 +1,4 @@
-package com.academics.undertone.entity.client;
+package com.academics.undertone.entity.client.Grock;
 
 import com.academics.undertone.Undertone;
 import com.academics.undertone.entity.custom.GrockEntity;

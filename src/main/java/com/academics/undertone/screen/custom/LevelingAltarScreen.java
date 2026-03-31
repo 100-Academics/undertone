@@ -1,5 +1,6 @@
 package com.academics.undertone.screen.custom;
 
+import com.academics.undertone.player.PlayerAttributeLevels;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -10,7 +11,7 @@ public class LevelingAltarScreen extends AbstractContainerScreen<LevelingAltarMe
 	public LevelingAltarScreen(LevelingAltarMenu menu, Inventory playerInventory, Component title) {
 		super(menu, playerInventory, title);
 		this.imageWidth = 176;
-		this.imageHeight = 96;
+		this.imageHeight = 160;
 		this.inventoryLabelY = 10000;
 	}
 
@@ -18,12 +19,44 @@ public class LevelingAltarScreen extends AbstractContainerScreen<LevelingAltarMe
 	protected void init() {
 		super.init();
 
-		this.addRenderableWidget(
-				Button.builder(Component.literal("Level Up"), button -> {
-					// Hook this up to a server packet when upgrade logic is implemented.
-				}).bounds(this.leftPos + 38, this.topPos + 60, 100, 20).build()
-		);
+		int index = 0;
+		for (PlayerAttributeLevels.Entry entry : PlayerAttributeLevels.entries().values()) {
+			int column = index % 2;
+			int row = index / 2;
+			int x = this.leftPos + 8 + (column * 82);
+			int y = this.topPos + 38 + (row * 22);
+
+			this.addRenderableWidget(
+					Button.builder(Component.literal(formatAttributeLabel(entry.id())), button -> {
+						// Hook this up to a server packet when upgrade logic is implemented.
+					}).bounds(x, y, 78, 20).build()
+			);
+
+			index++;
+		}
 	}
+
+	private static String formatAttributeLabel(String id) {
+		String[] words = id.split("_");
+		StringBuilder builder = new StringBuilder();
+		for (String word : words) {
+			if (word.isEmpty()) {
+				continue;
+			}
+			if (!builder.isEmpty()) {
+				builder.append(' ');
+			}
+			builder.append(Character.toUpperCase(word.charAt(0)));
+			if (word.length() > 1) {
+				builder.append(word.substring(1));
+			}
+		}
+		return builder.toString() ;
+	}
+
+    private void changeLevels(int entry){
+        // TODO
+    }
 
 	@Override
 	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {

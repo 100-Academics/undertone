@@ -53,6 +53,7 @@ public class PlayerAttributeLevels {
     public static final Entry SATURATION = register(new Entry("saturation", ModChangeAttributes.SATURATION, ModAttachments.SATURATION_LEVEL, 20));
     public static final Entry REGENERATION = register(new Entry("regeneration", ModChangeAttributes.REGENERATION, ModAttachments.REGENERATION_LEVEL, 20));
     public static final Entry ABSORPTION = register(new Entry("absorption", ModChangeAttributes.ABSORPTION, ModAttachments.ABSORPTION_LEVEL, 20));
+    private static final int[] costs = new int[]{100, 500, 650, 350, 750, 550, 400, 800, 780};
 
     private static Entry register(Entry entry) {
         ENTRIES.put(entry.id(), entry);
@@ -90,6 +91,13 @@ public class PlayerAttributeLevels {
 
     private static int clampLevel(int value, int maxLevel) {
         return Math.max(0, Math.min(maxLevel, value));
+    }
+
+    public static double getCostForLevel(int entry, int level){
+        if(entry < 0 || entry >= costs.length){
+            throw new IllegalArgumentException("Invalid entry index: " + entry);
+        }
+        return (costs[entry] * (level+1 * 1.25));
     }
 }
 
