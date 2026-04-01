@@ -25,9 +25,9 @@ public class ModCreativeModeTabs {
                             output.accept(ModBlocks.ZINC_BLOCK);
                             output.accept(ModItems.BLOCK_SWAPPER);
                             output.accept(ModItems.FIRSTDUNGEON_CHESTPLATE);
-                            output.accept(ModItems.FIRSTDUNEGON_BOOTS);
-                            output.accept(ModItems.FIRSTDUNEGON_HELMET);
-                            output.accept(ModItems.FIRSTDUNGEON_LEGGINS);
+                            output.accept(ModItems.FIRSTDUNGEON_BOOTS);
+                            output.accept(ModItems.FIRSTDUNGEON_HELMET);
+                            output.accept(ModItems.FIRSTDUNGEON_LEGGINGS);
                         })
                         .build());
         public static void register(IEventBus bus) { // this is to allow the game to register our creative mode tab at the appropriate time during mod loading. This should always be called from the constructor of your main mod class, and the bus parameter should be the mod event bus passed into the constructor.

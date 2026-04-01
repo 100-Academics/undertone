@@ -7,6 +7,7 @@ import com.academics.undertone.entity.ModEntities;
 import com.academics.undertone.entity.attachments.ModAttachments;
 import com.academics.undertone.entity.client.Grock.GrockRenderer;
 import com.academics.undertone.entity.client.Rudahh.RudahhRenderer;
+import com.academics.undertone.item.ModArmorMaterials;
 import com.academics.undertone.item.ModCreativeModeTabs;
 import com.academics.undertone.item.ModItems;
 import com.academics.undertone.player.ModChangeAttributes;
@@ -72,6 +73,7 @@ public class Undertone {
         NeoForge.EVENT_BUS.register(ModCommands.class);
 
         ModCreativeModeTabs.register(modEventBus); // Register the deferred registers for our mod content. This will allow the game to recognize and load our items, blocks, creative mode tabs, etc etc.
+        ModArmorMaterials.register(modEventBus);
         ModItems.register(modEventBus); // see above
         ModBlocks.register(modEventBus); // see above
 
