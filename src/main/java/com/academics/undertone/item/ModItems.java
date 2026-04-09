@@ -19,6 +19,12 @@ public class ModItems {
     public static final DeferredItem<Item> RAW_ZINC = ITEMS.register("raw_zinc", // same as above
             () -> new Item(new Item.Properties()));
 
+    public static final DeferredItem<Item> WEAK_DUNGONIUM_INGOT = ITEMS.register("weak_dungonium_ingot", // register new item with name "zinc_ingot" and properties defined in the supplier function
+            () -> new Item(new Item.Properties())); // () -> indicates that this is a supplier function, which is necessary for deferred registration. The item properties can be customized as needed, but for a simple item like an ingot, the default properties are usually sufficient.
+
+    public static final DeferredItem<Item> RAW_WEAK_DUNGONIUM = ITEMS.register("raw_weak_dungonium", // same as above
+            () -> new Item(new Item.Properties()));
+
     public static final DeferredItem<Item> BLOCK_SWAPPER = ITEMS.register("block_swapper",
             () -> new BlockSwapperItem(new Item.Properties().durability(64).stacksTo(1)));
                   // ** ^^^^ when registering a complex item, make sure to call the class instead of Item.
