@@ -1,6 +1,10 @@
 {
   "item.undertone.zinc_ingot": "Zinc Ingot",
   "item.undertone.raw_zinc": "Raw Zinc",
+  "item.undertone.raw_weak_dungonium": "Raw Weak Dungonium",
+  "item.undertone.weak_dungonium_ingot": "Raw Weak Dungonium Ingot",
+
+
   "item.undertone.block_swapper": "Block Swapper",
 
 
@@ -8,7 +12,7 @@
   "block.undertone.zinc_ore": "Zinc Ore",
   "block.undertone.zinc_block": "Block of Zinc",
 
-  "block.undertone.zinc_block": "Block of Zinc",
+  "block.undertone.dungonium_block": "Block of Weak Dungonium",
 
   "block.undertone.leveling_altar": "Leveling Altar",
 
