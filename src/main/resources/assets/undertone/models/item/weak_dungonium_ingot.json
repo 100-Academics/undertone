@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "undertone:item/weak_dungonium_ingot"
+  }
+}
