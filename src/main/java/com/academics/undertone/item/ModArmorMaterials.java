@@ -21,8 +21,8 @@ public class ModArmorMaterials {
     public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIALS =
             DeferredRegister.create(Registries.ARMOR_MATERIAL, Undertone.MODID);
 
-    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> FIRST_DUNGEON = registerMaterial(
-            "first_dungeon",
+    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> WEAK_DUNGONIUM = registerMaterial(
+            "weak_dungonium",
             3, 8, 6, 3,
             12,
             SoundEvents.ARMOR_EQUIP_IRON,

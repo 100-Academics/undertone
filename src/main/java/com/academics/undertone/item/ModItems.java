@@ -29,15 +29,11 @@ public class ModItems {
             () -> new BlockSwapperItem(new Item.Properties().durability(64).stacksTo(1)));
                   // ** ^^^^ when registering a complex item, make sure to call the class instead of Item.
 
-    public static final DeferredItem<Item> FIRSTDUNGEON_HELMET = registerArmorItem("firstdungeon_helmet", ModArmorMaterials.FIRST_DUNGEON, ArmorItem.Type.HELMET);
-    public static final DeferredItem<Item> FIRSTDUNGEON_CHESTPLATE = registerArmorItem("firstdungeon_chestplate", ModArmorMaterials.FIRST_DUNGEON, ArmorItem.Type.CHESTPLATE);
-    public static final DeferredItem<Item> FIRSTDUNGEON_LEGGINGS = registerArmorItem("firstdungeon_leggings", ModArmorMaterials.FIRST_DUNGEON, ArmorItem.Type.LEGGINGS);
-    public static final DeferredItem<Item> FIRSTDUNGEON_BOOTS = registerArmorItem("firstdungeon_boots", ModArmorMaterials.FIRST_DUNGEON, ArmorItem.Type.BOOTS);
+    public static final DeferredItem<Item> WEAK_DUNGONIUM_HELMET = registerArmorItem("weak_dungonium_helmet", ModArmorMaterials.WEAK_DUNGONIUM, ArmorItem.Type.HELMET);
+    public static final DeferredItem<Item> WEAK_DUNGONIUM_CHESTPLATE = registerArmorItem("weak_dungonium_chestplate", ModArmorMaterials.WEAK_DUNGONIUM, ArmorItem.Type.CHESTPLATE);
+    public static final DeferredItem<Item> WEAK_DUNGONIUM_LEGGINGS = registerArmorItem("weak_dungonium_leggings", ModArmorMaterials.WEAK_DUNGONIUM, ArmorItem.Type.LEGGINGS);
+    public static final DeferredItem<Item> WEAK_DUNGONIUM_BOOTS = registerArmorItem("weak_dungonium_boots", ModArmorMaterials.WEAK_DUNGONIUM, ArmorItem.Type.BOOTS);
 
-    // Backward-compatible aliases so old references keep compiling while names are cleaned up.
-    public static final DeferredItem<Item> FIRSTDUNEGON_HELMET = FIRSTDUNGEON_HELMET;
-    public static final DeferredItem<Item> FIRSTDUNEGON_BOOTS = FIRSTDUNGEON_BOOTS;
-    public static final DeferredItem<Item> FIRSTDUNGEON_LEGGINS = FIRSTDUNGEON_LEGGINGS;
 
     private static DeferredItem<Item> registerArmorItem(String name, Holder<ArmorMaterial> material, ArmorItem.Type type) {
         return ITEMS.register(name,
