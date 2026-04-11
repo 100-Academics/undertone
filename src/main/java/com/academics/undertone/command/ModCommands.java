@@ -37,11 +37,9 @@ public class ModCommands {
                         .then(Commands.argument(ARG_TARGET, EntityArgument.player())
                                 .then(Commands.argument(ARG_AMOUNT, IntegerArgumentType.integer(1))
                                         .executes(context -> {
-                                            // Extract arguments
                                             ServerPlayer targetPlayer = EntityArgument.getPlayer(context, ARG_TARGET);
                                             int amount = IntegerArgumentType.getInteger(context, ARG_AMOUNT);
 
-                                            // Pass to your private method
                                             return addorbs(context.getSource(), targetPlayer, amount);
                                         })
                                 )
@@ -52,10 +50,8 @@ public class ModCommands {
                 Commands.literal("printorbs")
                         .then(Commands.argument(ARG_TARGET, EntityArgument.player())
                                 .executes(context -> {
-                                    // Extract arguments
                                     ServerPlayer targetPlayer = EntityArgument.getPlayer(context, ARG_TARGET);
 
-                                    // Pass to your private method
                                     return printorbs(context.getSource(), targetPlayer);
                                 })
                         )
@@ -70,12 +66,10 @@ public class ModCommands {
                                                 .suggests(ModCommands::suggestAttributes)
                                                 .then(Commands.argument(ARG_LEVEL, IntegerArgumentType.integer(0))
                                                         .executes(context -> {
-                                                            // Extract arguments
                                                             ServerPlayer targetPlayer = EntityArgument.getPlayer(context, ARG_TARGET);
                                                             String attribute = StringArgumentType.getString(context, ARG_ATTRIBUTE);
                                                             int level = IntegerArgumentType.getInteger(context, ARG_LEVEL);
 
-                                                            // Pass to your private method
                                                             return setAttributeLevel(context.getSource(), targetPlayer, attribute, level);
                                                         })
                                                 )
@@ -88,12 +82,10 @@ public class ModCommands {
                                                 .suggests(ModCommands::suggestAttributes)
                                                 .then(Commands.argument(ARG_LEVEL, IntegerArgumentType.integer(1))
                                                         .executes(context -> {
-                                                            // Extract arguments
                                                             ServerPlayer targetPlayer = EntityArgument.getPlayer(context, ARG_TARGET);
                                                             String attribute = StringArgumentType.getString(context, ARG_ATTRIBUTE);
                                                             int level = IntegerArgumentType.getInteger(context, ARG_LEVEL);
 
-                                                            // Pass to your private method
                                                             return addAttributeLevel(context.getSource(), targetPlayer, attribute, level);
                                                         })
                                                 )
@@ -106,12 +98,10 @@ public class ModCommands {
                                                 .suggests(ModCommands::suggestAttributes)
                                                 .then(Commands.argument(ARG_LEVEL, IntegerArgumentType.integer(1))
                                                         .executes(context -> {
-                                                            // Extract arguments
                                                             ServerPlayer targetPlayer = EntityArgument.getPlayer(context, ARG_TARGET);
                                                             String attribute = StringArgumentType.getString(context, ARG_ATTRIBUTE);
                                                             int level = IntegerArgumentType.getInteger(context, ARG_LEVEL);
 
-                                                            // Pass to your private method
                                                             return addAttributeLevel(context.getSource(), targetPlayer, attribute, -level);
                                                         })
                                                 )
@@ -123,23 +113,19 @@ public class ModCommands {
                                         .then(Commands.argument(ARG_ATTRIBUTE, StringArgumentType.word())
                                                 .suggests(ModCommands::suggestAttributes)
                                                 .executes(context -> {
-                                                    // Extract arguments
                                                     ServerPlayer targetPlayer = EntityArgument.getPlayer(context, ARG_TARGET);
                                                     String attribute = StringArgumentType.getString(context, ARG_ATTRIBUTE);
 
-                                                    // Pass to your private method
                                                     return getAttributeLevel(context.getSource(), targetPlayer, attribute);
                                                 })
                                         )
                                 )
                         )
-                        .then(Commands.literal("clear")
+                        .then(Commands.literal("clearall")
                                 .then(Commands.argument(ARG_TARGET, EntityArgument.player())
                                         .executes(context -> {
-                                            // Extract arguments
                                             ServerPlayer targetPlayer = EntityArgument.getPlayer(context, ARG_TARGET);
 
-                                            // Pass to your private method
                                             return clearAttributeLevels(context.getSource(), targetPlayer);
                                         })
                                 )
