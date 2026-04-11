@@ -29,13 +29,13 @@ public class ModItems {
             () -> new BlockSwapperItem(new Item.Properties().durability(64).stacksTo(1)));
                   // ** ^^^^ when registering a complex item, make sure to call the class instead of Item.
 
-    public static final DeferredItem<Item> WEAK_DUNGONIUM_HELMET = registerArmorItem("weak_dungonium_helmet", ModArmorMaterials.WEAK_DUNGONIUM, ArmorItem.Type.HELMET);
-    public static final DeferredItem<Item> WEAK_DUNGONIUM_CHESTPLATE = registerArmorItem("weak_dungonium_chestplate", ModArmorMaterials.WEAK_DUNGONIUM, ArmorItem.Type.CHESTPLATE);
-    public static final DeferredItem<Item> WEAK_DUNGONIUM_LEGGINGS = registerArmorItem("weak_dungonium_leggings", ModArmorMaterials.WEAK_DUNGONIUM, ArmorItem.Type.LEGGINGS);
-    public static final DeferredItem<Item> WEAK_DUNGONIUM_BOOTS = registerArmorItem("weak_dungonium_boots", ModArmorMaterials.WEAK_DUNGONIUM, ArmorItem.Type.BOOTS);
+    public static final DeferredItem<ArmorItem> WEAK_DUNGONIUM_HELMET = registerArmorItem("weak_dungonium_helmet", ModArmorMaterials.WEAK_DUNGONIUM, ArmorItem.Type.HELMET);
+    public static final DeferredItem<ArmorItem> WEAK_DUNGONIUM_CHESTPLATE = registerArmorItem("weak_dungonium_chestplate", ModArmorMaterials.WEAK_DUNGONIUM, ArmorItem.Type.CHESTPLATE);
+    public static final DeferredItem<ArmorItem> WEAK_DUNGONIUM_LEGGINGS = registerArmorItem("weak_dungonium_leggings", ModArmorMaterials.WEAK_DUNGONIUM, ArmorItem.Type.LEGGINGS);
+    public static final DeferredItem<ArmorItem> WEAK_DUNGONIUM_BOOTS = registerArmorItem("weak_dungonium_boots", ModArmorMaterials.WEAK_DUNGONIUM, ArmorItem.Type.BOOTS);
 
 
-    private static DeferredItem<Item> registerArmorItem(String name, Holder<ArmorMaterial> material, ArmorItem.Type type) {
+    private static DeferredItem<ArmorItem> registerArmorItem(String name, Holder<ArmorMaterial> material, ArmorItem.Type type) {
         return ITEMS.register(name,
                 () -> new ArmorItem(material, type, new Item.Properties().durability(type.getDurability(25))));
     }

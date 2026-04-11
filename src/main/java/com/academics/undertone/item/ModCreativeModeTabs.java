@@ -28,6 +28,8 @@ public class ModCreativeModeTabs {
                             output.accept(ModItems.WEAK_DUNGONIUM_BOOTS);
                             output.accept(ModItems.WEAK_DUNGONIUM_HELMET);
                             output.accept(ModItems.WEAK_DUNGONIUM_LEGGINGS);
+                            output.accept(ModItems.RAW_WEAK_DUNGONIUM);
+                            output.accept(ModItems.WEAK_DUNGONIUM_INGOT);
                         })
                         .build());
         public static void register(IEventBus bus) { // this is to allow the game to register our creative mode tab at the appropriate time during mod loading. This should always be called from the constructor of your main mod class, and the bus parameter should be the mod event bus passed into the constructor.
