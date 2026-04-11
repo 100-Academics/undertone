@@ -4,7 +4,7 @@
   "cookingtime": 100,
   "experience": 0.7,
   "ingredient": {
-    "item": "undertone:raw-weak_dungonium"
+    "item": "undertone:raw_weak_dungonium"
   },
   "result":{
     "count": 1,
