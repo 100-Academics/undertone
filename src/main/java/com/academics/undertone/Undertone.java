@@ -11,6 +11,7 @@ import com.academics.undertone.item.ModArmorMaterials;
 import com.academics.undertone.item.ModCreativeModeTabs;
 import com.academics.undertone.item.ModItems;
 import com.academics.undertone.player.ModChangeAttributes;
+import com.academics.undertone.network.ModPayloads;
 import com.academics.undertone.screen.ModMenuTypes;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import org.slf4j.Logger;
@@ -82,6 +83,7 @@ public class Undertone {
 
         ModAttachments.register(modEventBus); // see above
         ModChangeAttributes.register(modEventBus); // register custom player attributes
+        modEventBus.addListener(ModPayloads::register);
 
         ModMenuTypes.register(modEventBus);
         // Register the item to a creative tab

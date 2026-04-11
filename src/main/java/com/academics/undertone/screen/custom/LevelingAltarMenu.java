@@ -4,6 +4,7 @@ import com.academics.undertone.block.ModBlocks;
 import com.academics.undertone.entity.attachments.ModAttachments;
 import com.academics.undertone.player.PlayerAttributeLevels;
 import com.academics.undertone.screen.ModMenuTypes;
+import com.academics.undertone.Undertone;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -62,16 +63,35 @@ public class LevelingAltarMenu extends AbstractContainerMenu {
     }
 
     public void changeLevel(PlayerAttributeLevels.Entry entry) {
-        this.access.execute((level, pos) -> {
-            int currentLevel = PlayerAttributeLevels.getLevel(this.player, entry);
-            if (currentLevel < entry.maxLevel()) {
-                int orbs = this.getOrbs();
-                double cost = PlayerAttributeLevels.getCostForLevel(entry, currentLevel);
-                if (orbs >= cost) {
-                    PlayerAttributeLevels.setLevel(this.player, entry, currentLevel + 1);
-                    this.data.set(0, (int) (orbs - cost));
-                }
+        int currentLevel = PlayerAttributeLevels.getLevel(this.player, entry);
+        Undertone.LOGGER.info("changeLevel called for {}, current level: {}", entry.id(), currentLevel);
+        if (currentLevel < entry.maxLevel()) {
+            int orbs = this.player.getData(ModAttachments.ORBS.get());
+            int cost = (int) Math.ceil(PlayerAttributeLevels.getCostForLevel(entry, currentLevel));
+            Undertone.LOGGER.info("Orbs: {}, Cost: {}, Can afford: {}", orbs, cost, orbs >= cost);
+            if (orbs >= cost) {
+                Undertone.LOGGER.info("Spending {} orbs on {} (level {} -> {})", cost, entry.id(), currentLevel, currentLevel + 1);
+                PlayerAttributeLevels.setLevel(this.player, entry, currentLevel + 1);
+                int updatedOrbs = orbs - cost;
+                this.player.setData(ModAttachments.ORBS.get(), updatedOrbs);
+                this.data.set(0, updatedOrbs);
+                this.broadcastChanges();
+                Undertone.LOGGER.info("Updated player to level {} with {} orbs remaining", currentLevel + 1, updatedOrbs);
             }
-        });
+        }
+    }
+
+    @Override
+    public boolean clickMenuButton(Player player, int id) {
+        Undertone.LOGGER.info("clickMenuButton called with id: {}", id);
+        PlayerAttributeLevels.Entry entry = PlayerAttributeLevels.byIndex(id);
+
+        if (entry == null) {
+            Undertone.LOGGER.warn("Entry was null for id: {}", id);
+            return false;
+        }
+
+        this.changeLevel(entry);
+        return true;
     }
 }
