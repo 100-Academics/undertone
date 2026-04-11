@@ -73,6 +73,15 @@ public class ModItemModelProvider extends ItemModelProvider {
         final String MOD_ID = Undertone.MODID; // Change this to your mod id
 
         if(itemDeferredItem.get() instanceof ArmorItem armorItem) {
+            ResourceLocation armorItemResLoc = itemDeferredItem.getId();
+
+            // Build the base model once, then append trim overrides.
+            ItemModelBuilder baseModel = this.withExistingParent(armorItemResLoc.getPath(),
+                            mcLoc("item/generated"))
+                    .texture("layer0",
+                            ResourceLocation.fromNamespaceAndPath(MOD_ID,
+                                    "item/" + armorItemResLoc.getPath()));
+
             trimMaterials.forEach((trimMaterial, value) -> {
                 float trimValue = value;
 
@@ -84,12 +93,10 @@ public class ModItemModelProvider extends ItemModelProvider {
                     default -> "";
                 };
 
-                String armorItemPath = armorItem.toString();
                 String trimPath = "trims/items/" + armorType + "_trim_" + trimMaterial.location().getPath();
-                String currentTrimName = armorItemPath + "_" + trimMaterial.location().getPath() + "_trim";
-                ResourceLocation armorItemResLoc = ResourceLocation.parse(armorItemPath);
+                String currentTrimName = armorItemResLoc.getPath() + "_" + trimMaterial.location().getPath() + "_trim";
                 ResourceLocation trimResLoc = ResourceLocation.parse(trimPath); // minecraft namespace
-                ResourceLocation trimNameResLoc = ResourceLocation.parse(currentTrimName);
+                ResourceLocation trimNameResLoc = ResourceLocation.fromNamespaceAndPath(MOD_ID, currentTrimName);
 
                 // This is used for making the ExistingFileHelper acknowledge that this texture exist, so this will
                 // avoid an IllegalArgumentException
@@ -101,15 +108,10 @@ public class ModItemModelProvider extends ItemModelProvider {
                         .texture("layer0", armorItemResLoc.getNamespace() + ":item/" + armorItemResLoc.getPath())
                         .texture("layer1", trimResLoc);
 
-                // Non-trimmed armorItem file (normal variant)
-                this.withExistingParent(itemDeferredItem.getId().getPath(),
-                                mcLoc("item/generated"))
-                        .override()
+                // Non-trimmed armorItem file (normal variant) + trim override.
+                baseModel.override()
                         .model(new ModelFile.UncheckedModelFile(trimNameResLoc.getNamespace()  + ":item/" + trimNameResLoc.getPath()))
-                        .predicate(mcLoc("trim_type"), trimValue).end()
-                        .texture("layer0",
-                                ResourceLocation.fromNamespaceAndPath(MOD_ID,
-                                        "item/" + itemDeferredItem.getId().getPath()));
+                        .predicate(mcLoc("trim_type"), trimValue).end();
             });
         }
     }
