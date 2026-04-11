@@ -28,7 +28,7 @@ public class LevelingAltarScreen extends AbstractContainerScreen<LevelingAltarMe
 
 			this.addRenderableWidget(
 					Button.builder(Component.literal(formatAttributeLabel(entry.id())), button -> {
-						// Hook this up to a server packet when upgrade logic is implemented.
+						this.changeLevel(entry.index(entry));
 					}).bounds(x, y, 78, 20).build()
 			);
 
@@ -54,9 +54,20 @@ public class LevelingAltarScreen extends AbstractContainerScreen<LevelingAltarMe
 		return builder.toString() ;
 	}
 
-    private void changeLevels(int entry){
-        // TODO
-    }
+    private void changeLevel(int entry) {
+		switch (entry) {
+			case 0 -> this.menu.changeLevel(PlayerAttributeLevels.FIRE_RESISTANCE);
+			case 1 -> this.menu.changeLevel(PlayerAttributeLevels.RESISTANCE);
+			case 2 -> this.menu.changeLevel(PlayerAttributeLevels.STRENGTH);
+			case 3 -> this.menu.changeLevel(PlayerAttributeLevels.WATER_BREATHING);
+			case 4 -> this.menu.changeLevel(PlayerAttributeLevels.HASTE);
+			case 5 -> this.menu.changeLevel(PlayerAttributeLevels.HEALTH);
+			case 6 -> this.menu.changeLevel(PlayerAttributeLevels.SATURATION);
+			case 7 -> this.menu.changeLevel(PlayerAttributeLevels.REGENERATION);
+			case 8 -> this.menu.changeLevel(PlayerAttributeLevels.ABSORPTION);
+			case 9 -> this.menu.changeLevel(PlayerAttributeLevels.LUCK);
+		}
+	}
 
 	@Override
 	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {

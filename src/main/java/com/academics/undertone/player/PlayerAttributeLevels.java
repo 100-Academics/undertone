@@ -40,6 +40,22 @@ public class PlayerAttributeLevels {
         public int maxLevel() {
             return maxLevel;
         }
+
+        public int index(Entry entry) {
+            return switch (entry.id) {
+                case "fire_resistance" -> 0;
+                case "resistance" -> 1;
+                case "strength" -> 2;
+                case "water_breathing" -> 3;
+                case "haste" -> 4;
+                case "health" -> 5;
+                case "saturation" -> 6;
+                case "regeneration" -> 7;
+                case "absorption" -> 8;
+                case "luck" -> 9;
+                default -> throw new IllegalArgumentException("Unknown entry: " + entry.id());
+            };
+        }
     }
 
     private static final Map<String, Entry> ENTRIES = new LinkedHashMap<>();
@@ -53,7 +69,9 @@ public class PlayerAttributeLevels {
     public static final Entry SATURATION = register(new Entry("saturation", ModChangeAttributes.SATURATION, ModAttachments.SATURATION_LEVEL, 20));
     public static final Entry REGENERATION = register(new Entry("regeneration", ModChangeAttributes.REGENERATION, ModAttachments.REGENERATION_LEVEL, 20));
     public static final Entry ABSORPTION = register(new Entry("absorption", ModChangeAttributes.ABSORPTION, ModAttachments.ABSORPTION_LEVEL, 20));
-    private static final int[] costs = new int[]{100, 500, 650, 350, 750, 550, 400, 800, 780};
+    public static final Entry LUCK = register(new Entry("luck", ModChangeAttributes.LUCK, ModAttachments.LUCK_LEVEL, 5));
+
+    private static final int[] costs = new int[]{100, 500, 650, 350, 750, 550, 400, 800, 780, 350};
 
     private static Entry register(Entry entry) {
         ENTRIES.put(entry.id(), entry);
@@ -93,11 +111,12 @@ public class PlayerAttributeLevels {
         return Math.max(0, Math.min(maxLevel, value));
     }
 
-    public static double getCostForLevel(int entry, int level){
-        if(entry < 0 || entry >= costs.length){
+    public static double getCostForLevel(Entry entry, int level){
+        int entryIndex = entry.index(entry);
+        if(entryIndex < 0 || entryIndex >= costs.length){
             throw new IllegalArgumentException("Invalid entry index: " + entry);
         }
-        return (costs[entry] * (level+1 * 1.25));
+        return (costs[entryIndex] * (level+1 * 1.25));
     }
 }
 

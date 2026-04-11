@@ -28,6 +28,7 @@ public class ModAttachments {
     public static final Supplier<AttachmentType<Integer>> SATURATION_LEVEL = registerIntLevel("saturation_level");
     public static final Supplier<AttachmentType<Integer>> REGENERATION_LEVEL = registerIntLevel("regeneration_level");
     public static final Supplier<AttachmentType<Integer>> ABSORPTION_LEVEL = registerIntLevel("absorption_level");
+    public static final Supplier<AttachmentType<Integer>> LUCK_LEVEL = registerIntLevel("luck_level");
 
     private static Supplier<AttachmentType<Integer>> registerIntLevel(String id) {
         return ATTACHMENT_TYPES.register(id, () -> AttachmentType.builder(() -> 0)

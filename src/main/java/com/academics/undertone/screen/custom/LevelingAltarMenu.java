@@ -2,6 +2,7 @@ package com.academics.undertone.screen.custom;
 
 import com.academics.undertone.block.ModBlocks;
 import com.academics.undertone.entity.attachments.ModAttachments;
+import com.academics.undertone.player.PlayerAttributeLevels;
 import com.academics.undertone.screen.ModMenuTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -58,5 +59,19 @@ public class LevelingAltarMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player player) {
         return stillValid(this.access, player, ModBlocks.LEVELING_ALTAR.get());
+    }
+
+    public void changeLevel(PlayerAttributeLevels.Entry entry) {
+        this.access.execute((level, pos) -> {
+            int currentLevel = PlayerAttributeLevels.getLevel(this.player, entry);
+            if (currentLevel < entry.maxLevel()) {
+                int orbs = this.getOrbs();
+                double cost = PlayerAttributeLevels.getCostForLevel(entry, currentLevel);
+                if (orbs >= cost) {
+                    PlayerAttributeLevels.setLevel(this.player, entry, currentLevel + 1);
+                    this.data.set(0, (int) (orbs - cost));
+                }
+            }
+        });
     }
 }

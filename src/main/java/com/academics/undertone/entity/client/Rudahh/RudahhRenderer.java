@@ -24,7 +24,7 @@ public class RudahhRenderer extends MobRenderer<RudahhEntity, RudahhModel<Rudahh
         if(entity.isBaby()){
             poseStack.scale(0.5f, 1.0f, 0.5f); // Scale down the model for baby entities
         } else {
-            poseStack.scale(1f, 1f, 1f); // Normal scale for adult entities
+            poseStack.scale(1.5f, 1.5f, 1.5f); // Normal scale for adult entities
         }
 
         super.render(entity, entityYaw, partialTicks, poseStack, bufferSource, packedLight);

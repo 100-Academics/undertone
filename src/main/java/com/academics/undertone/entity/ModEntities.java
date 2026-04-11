@@ -23,7 +23,7 @@ public class ModEntities {
 
     public static final Supplier<EntityType<RudahhEntity>> RUDAHH = ENTITY_TYPES.register("rudahh",
             () -> EntityType.Builder.of(RudahhEntity::new, MobCategory.MONSTER)
-                    .sized(0.6f, 1.8f) // hitbox size of the entity (width, height)
+                    .sized(0.6f, 1.8f)
                     .fireImmune()
                     .build("rudahh"));
 

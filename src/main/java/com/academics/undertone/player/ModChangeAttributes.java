@@ -25,6 +25,7 @@ public class ModChangeAttributes {
     public static final DeferredHolder<Attribute, Attribute> SATURATION = register("saturation", 0.0D, 0.0D, 20.0D);
     public static final DeferredHolder<Attribute, Attribute> REGENERATION = register("regeneration", 0.0D, 0.0D, 20.0D);
     public static final DeferredHolder<Attribute, Attribute> ABSORPTION = register("absorption", 0.0D, 0.0D, 20.0D);
+    public static final DeferredHolder<Attribute, Attribute> LUCK = register("luck", 0.0D, 0.0D, 5.0D);
 
     private static DeferredHolder<Attribute, Attribute> register(String id, double defaultValue, double min, double max) {
         return ATTRIBUTES.register(id,
@@ -47,5 +48,6 @@ public class ModChangeAttributes {
         event.add(EntityType.PLAYER, SATURATION);
         event.add(EntityType.PLAYER, REGENERATION);
         event.add(EntityType.PLAYER, ABSORPTION);
+        event.add(EntityType.PLAYER, LUCK);
     }
 }

@@ -33,6 +33,7 @@ public class ChangeAttributes {
         syncAttributeFromLevel(player, PlayerAttributeLevels.SATURATION);
         syncAttributeFromLevel(player, PlayerAttributeLevels.REGENERATION);
         syncAttributeFromLevel(player, PlayerAttributeLevels.ABSORPTION);
+        syncAttributeFromLevel(player, PlayerAttributeLevels.LUCK);
 
         applyEffectFromLevel(player, PlayerAttributeLevels.FIRE_RESISTANCE, MobEffects.FIRE_RESISTANCE);
         applyEffectFromLevel(player, PlayerAttributeLevels.RESISTANCE, MobEffects.DAMAGE_RESISTANCE);
