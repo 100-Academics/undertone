@@ -1,6 +1,5 @@
 package com.academics.undertone.events;
 
-import com.academics.undertone.Undertone;
 import com.academics.undertone.entity.ModEntities;
 import com.academics.undertone.entity.client.Grock.GrockModel;
 import com.academics.undertone.entity.client.Rudahh.RudahhModel;
@@ -14,7 +13,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 
-@EventBusSubscriber(modid = Undertone.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = "undertone", bus = EventBusSubscriber.Bus.MOD)
 public class ModEventBusEvents {
 
     @SubscribeEvent
@@ -23,7 +22,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.RUDAHH.get(), RudahhEntity.createAttributes().build());
     }
 
-    @EventBusSubscriber(modid = Undertone.MODID, bus = EventBusSubscriber.Bus.MOD, value = net.neoforged.api.distmarker.Dist.CLIENT)
+    @EventBusSubscriber(modid = "undertone", bus = EventBusSubscriber.Bus.MOD, value = net.neoforged.api.distmarker.Dist.CLIENT)
     public static class ClientModEvents {
         @SubscribeEvent
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
