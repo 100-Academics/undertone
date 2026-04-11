@@ -86,6 +86,22 @@ public class PlayerAttributeLevels {
         return ENTRIES.get(id.toLowerCase(Locale.ROOT));
     }
 
+    public static Entry byIndex(int index) {
+        return switch (index) {
+            case 0 -> FIRE_RESISTANCE;
+            case 1 -> RESISTANCE;
+            case 2 -> STRENGTH;
+            case 3 -> WATER_BREATHING;
+            case 4 -> HASTE;
+            case 5 -> HEALTH;
+            case 6 -> SATURATION;
+            case 7 -> REGENERATION;
+            case 8 -> ABSORPTION;
+            case 9 -> LUCK;
+            default -> null;
+        };
+    }
+
     public static int getLevel(Player player, Entry entry) {
         return clampLevel(player.getData(entry.levelAttachment().get()), entry.maxLevel());
     }
@@ -111,12 +127,12 @@ public class PlayerAttributeLevels {
         return Math.max(0, Math.min(maxLevel, value));
     }
 
-    public static double getCostForLevel(Entry entry, int level){
+    public static int getCostForLevel(Entry entry, int level){
         int entryIndex = entry.index(entry);
         if(entryIndex < 0 || entryIndex >= costs.length){
             throw new IllegalArgumentException("Invalid entry index: " + entry);
         }
-        return (costs[entryIndex] * (level+1 * 1.25));
+        return (int) (costs[entryIndex] * ((level + 1) * 1.25));
     }
 }
 
