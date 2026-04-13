@@ -2,7 +2,7 @@ package com.academics.undertone.events;
 
 import com.academics.undertone.entity.ModEntities;
 import com.academics.undertone.entity.client.Grock.GrockModel;
-import com.academics.undertone.entity.client.Rudahh.RudahhModel;
+import com.academics.undertone.entity.client.Ailake.AilakeModel;
 import com.academics.undertone.entity.custom.GrockEntity;
 import com.academics.undertone.entity.custom.RudahhEntity;
 import com.academics.undertone.screen.ModMenuTypes;
@@ -27,7 +27,7 @@ public class ModEventBusEvents {
         @SubscribeEvent
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
             event.registerLayerDefinition(GrockModel.LAYER_LOCATION, GrockModel::createBodyLayer);
-            event.registerLayerDefinition(RudahhModel.LAYER_LOCATION, RudahhModel::createBodyLayer);
+            event.registerLayerDefinition(AilakeModel.LAYER_LOCATION, AilakeModel::createBodyLayer);
         }
 
         @SubscribeEvent
