@@ -24,7 +24,7 @@ public class AilakeRenderer extends MobRenderer<AilakeEntity, AilakeModel<Ailake
         if(entity.isBaby()){
             poseStack.scale(0.5f, 1.0f, 0.5f); // Scale down the model for baby entities
         } else {
-            poseStack.scale(1.5f, 1.5f, 1.5f); // Normal scale for adult entities
+            poseStack.scale(10f, 10f, 10f); // Normal scale for adult entities TODO scale right just like hitbox
         }
 
         super.render(entity, entityYaw, partialTicks, poseStack, bufferSource, packedLight);
