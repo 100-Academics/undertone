@@ -5,7 +5,7 @@ import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.client.animation.Keyframe;
 import net.minecraft.client.animation.KeyframeAnimations;
 
-public class AilakeAnimations {
+public class AilakeAnimations { // TODO FIX
     public static final AnimationDefinition roll = AnimationDefinition.Builder.withLength(1.8333F)
             .addAnimation("head", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                     new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),

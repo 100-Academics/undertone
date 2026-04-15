@@ -6,6 +6,7 @@ import com.academics.undertone.command.ModCommands;
 import com.academics.undertone.entity.ModEntities;
 import com.academics.undertone.entity.attachments.ModAttachments;
 import com.academics.undertone.entity.client.Grock.GrockRenderer;
+import com.academics.undertone.entity.client.Ailake.AilakeRenderer;
 import com.academics.undertone.entity.client.Rudahh.RudahhRenderer;
 import com.academics.undertone.item.ModArmorMaterials;
 import com.academics.undertone.item.ModCreativeModeTabs;
@@ -168,6 +169,7 @@ public class Undertone {
     static class ClientModEvents {
         @SubscribeEvent
         static void onClientSetup(FMLClientSetupEvent event) {
+            EntityRenderers.register(ModEntities.AILAKE.get(), AilakeRenderer::new);
             EntityRenderers.register(ModEntities.GROCK.get(), GrockRenderer::new);
             EntityRenderers.register(ModEntities.RUDAHH.get(), RudahhRenderer::new);
         }
