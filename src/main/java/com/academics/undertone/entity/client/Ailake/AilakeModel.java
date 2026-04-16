@@ -204,7 +204,9 @@ public class AilakeModel<T extends AilakeEntity> extends HierarchicalModel<T> {
     public void setupAnim(AilakeEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
 
-        this.animateWalk(AilakeAnimations.roll, limbSwing, limbSwingAmount, 2f, 2.5f);
+        if (limbSwingAmount > 0.05F) {
+            this.animateWalk(AilakeAnimations.roll, limbSwing, limbSwingAmount, 2f, 2.5f);
+        }
         this.animate(entity.attack1, AilakeAnimations.spit, ageInTicks, 1f);
         this.animate(entity.attack2, AilakeAnimations.bite, ageInTicks, 1f);
         this.animate(entity.idleAnimationState, AilakeAnimations.spin, ageInTicks, 1f);

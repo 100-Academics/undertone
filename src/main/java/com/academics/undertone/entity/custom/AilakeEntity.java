@@ -23,17 +23,21 @@ public class AilakeEntity extends Monster {
     private static final byte BITE_ANIMATION_EVENT = 61;
 
     public final AnimationState idleAnimationState = new AnimationState();
-    public final AnimationState idleAnimationState2 = new AnimationState();
     public final AnimationState attack1 = new AnimationState(); // spit
     public final AnimationState attack2 = new AnimationState(); // bite
     private int idleAnimationTimeout = 0;
     private int attackAnimationTimeout = 0;
-    private int r = 0;
 
     private float yaw;
     private float pitch;
 
     private static final int ATTACK_LOCK_TICKS = 24;
+    private static final int IDLE_SPIN_BASE_TICKS = 60;
+    private static final int IDLE_SPIN_RANDOM_TICKS = 40;
+    private static final int IDLE_SPIN_ALT_BASE_TICKS = 30;
+    private static final int IDLE_SPIN_ALT_RANDOM_TICKS = 20;
+    private static final int IDLE_DOWNTIME_BASE_TICKS = 160;
+    private static final int IDLE_DOWNTIME_RANDOM_TICKS = 80;
 
     // Use world-level RNG for deterministic world-tied randomness.
     private int nextWorldRandomInt(int bound) {
@@ -67,27 +71,23 @@ public class AilakeEntity extends Monster {
     }
 
 
-    private void setupAnimationStates(){
-        if(this.idleAnimationTimeout <= 0){
-
-            r = this.nextWorldRandomInt(5);
-
-            if(r == 1){
-                this.idleAnimationState2.stop();
-                this.idleAnimationTimeout = 60 + this.nextWorldRandomInt(40);
-                this.idleAnimationState.start(this.tickCount);
-            } if (r == 2) {
-                this.idleAnimationState.stop();
-                this.idleAnimationTimeout = 10;
-                this.idleAnimationState2.start(this.tickCount);
-            } else {
-                this.idleAnimationState.stop();
-                this.idleAnimationState2.stop();
-                idleAnimationTimeout = 200;
-            }
-
-        } else{
+    private void setupAnimationStates() {
+        if (this.idleAnimationTimeout > 0) {
             this.idleAnimationTimeout--;
+            return;
+        }
+
+        int r = this.nextWorldRandomInt(5);
+
+        if (r == 1) {
+            this.idleAnimationState.start(this.tickCount);
+            this.idleAnimationTimeout = IDLE_SPIN_BASE_TICKS + this.nextWorldRandomInt(IDLE_SPIN_RANDOM_TICKS);
+        } else if (r == 2) {
+            this.idleAnimationState.start(this.tickCount);
+            this.idleAnimationTimeout = IDLE_SPIN_ALT_BASE_TICKS + this.nextWorldRandomInt(IDLE_SPIN_ALT_RANDOM_TICKS);
+        } else {
+            this.idleAnimationState.stop();
+            this.idleAnimationTimeout = IDLE_DOWNTIME_BASE_TICKS + this.nextWorldRandomInt(IDLE_DOWNTIME_RANDOM_TICKS);
         }
     }
 

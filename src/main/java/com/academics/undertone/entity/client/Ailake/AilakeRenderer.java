@@ -8,6 +8,8 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
+import static com.academics.undertone.entity.ModEntities.ailakeScale;
+
 public class AilakeRenderer extends MobRenderer<AilakeEntity, AilakeModel<AilakeEntity>> {
 
     public AilakeRenderer(EntityRendererProvider.Context context) {
@@ -16,7 +18,7 @@ public class AilakeRenderer extends MobRenderer<AilakeEntity, AilakeModel<Ailake
 
     @Override
     public ResourceLocation getTextureLocation(AilakeEntity entity) {
-        return ResourceLocation.fromNamespaceAndPath(Undertone.MODID, "textures/entity/rudahh/rudahhtexture.png");
+        return ResourceLocation.fromNamespaceAndPath(Undertone.MODID, "textures/entity/ailake/ailaketexture.png");
     }
 
     @Override
@@ -24,7 +26,7 @@ public class AilakeRenderer extends MobRenderer<AilakeEntity, AilakeModel<Ailake
         if(entity.isBaby()){
             poseStack.scale(0.5f, 1.0f, 0.5f); // Scale down the model for baby entities
         } else {
-            poseStack.scale(10f, 10f, 10f); // Normal scale for adult entities TODO scale right just like hitbox
+            poseStack.scale(ailakeScale, ailakeScale, ailakeScale); // TODO REALLY NEED TO FIND RIGHT SIZE
         }
 
         super.render(entity, entityYaw, partialTicks, poseStack, bufferSource, packedLight);

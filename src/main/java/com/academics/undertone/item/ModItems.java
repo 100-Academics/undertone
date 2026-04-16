@@ -11,6 +11,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModItems {
+
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Undertone.MODID); // create new deferred register for items with our modid. This is necessary for each new type of thing you add, whether it be items, blocks, entities, etc etc.
 
     public static final DeferredItem<Item> ZINC_INGOT = ITEMS.register("zinc_ingot", // register new item with name "zinc_ingot" and properties defined in the supplier function
