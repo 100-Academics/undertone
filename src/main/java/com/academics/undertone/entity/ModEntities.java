@@ -14,6 +14,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class ModEntities {
+    public static final float ailakeScale = 2.5f;
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
             DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, Undertone.MODID);
 
@@ -31,7 +32,7 @@ public class ModEntities {
 
     public static final Supplier<EntityType<AilakeEntity>> AILAKE = ENTITY_TYPES.register("ailake",
             () -> EntityType.Builder.of(AilakeEntity::new, MobCategory.MONSTER)
-                    .sized(1f, 1f) //TODO set up better later
+                    .sized(ailakeScale, ailakeScale) //TODO set up better later
                     .fireImmune()
                     .build("ailake"));
 

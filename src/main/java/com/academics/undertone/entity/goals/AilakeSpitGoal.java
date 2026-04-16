@@ -12,6 +12,8 @@ public class AilakeSpitGoal extends Goal {
     // Spit animation apex is around 0.2917s in a 0.5s clip => ~6 ticks.
     private static final int WINDUP_TICKS = 6;
     private static final int BASE_COOLDOWN_TICKS = 22;
+    private static final double HEAD_FORWARD_OFFSET = 1.15D;
+    private static final double HEAD_VERTICAL_OFFSET = -0.05D;
 
     private final AilakeEntity ailake;
     private final double speedModifier;
@@ -104,11 +106,18 @@ public class AilakeSpitGoal extends Goal {
         }
 
         Snowball snowball = new Snowball(this.ailake.level(), this.ailake);
-        snowball.setPos(this.ailake.getX(), this.ailake.getEyeY() - 0.1D, this.ailake.getZ());
+        Vec3 spawnPos = this.getHeadSpitOrigin();
+        snowball.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
 
         Vec3 toTarget = target.getEyePosition().subtract(snowball.position());
         snowball.shoot(toTarget.x, toTarget.y, toTarget.z, 5F, 2.0F);
 
         this.ailake.level().addFreshEntity(snowball);
+    }
+
+    private Vec3 getHeadSpitOrigin() {
+        Vec3 look = this.ailake.getLookAngle();
+        Vec3 eyePos = this.ailake.getEyePosition();
+        return eyePos.add(look.scale(HEAD_FORWARD_OFFSET)).add(0.0D, HEAD_VERTICAL_OFFSET, 0.0D);
     }
 }

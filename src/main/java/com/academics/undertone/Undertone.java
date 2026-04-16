@@ -69,14 +69,14 @@ public class Undertone {
 
         ModCreativeModeTabs.register(modEventBus); // Register the deferred registers for our mod content. This will allow the game to recognize and load our items, blocks, creative mode tabs, etc etc.
         ModArmorMaterials.register(modEventBus);
-        ModItems.register(modEventBus); // see above
-        ModBlocks.register(modEventBus); // see above
+        ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
-        ModBlockEntities.register(modEventBus); // register block entities before they are instantiated in-world
-        ModEntities.register(modEventBus); // see above
+        ModBlockEntities.register(modEventBus);
+        ModEntities.register(modEventBus);
 
-        ModAttachments.register(modEventBus); // see above
-        ModChangeAttributes.register(modEventBus); // register custom player attributes
+        ModAttachments.register(modEventBus);
+        ModChangeAttributes.register(modEventBus);
         modEventBus.addListener(ModPayloads::register);
 
         ModMenuTypes.register(modEventBus);
